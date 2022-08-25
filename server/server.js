@@ -28,6 +28,15 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
   // Serve up static assets
   //this and appget for concurrent
+  //First, we check to see if the Node environment is in production. 
+  //If it is, we instruct the Express.js server to serve any files in the 
+  //React application's build directory in the client folder. We don't have 
+  //a build folder yet—because remember, that's for production only!
+
+  //The next set of functionality we created was a wildcard GET route for 
+  //the server. In other words, if we make a GET request to any location on 
+  //the server that doesn't have an explicit route defined, respond with the 
+  //production-ready React front-end code.
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
